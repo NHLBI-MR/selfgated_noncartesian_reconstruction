@@ -121,7 +121,7 @@
             <name>FloatToShort</name>
             <dll>gadgetron_mricore</dll>
             <classname>FloatToUShortGadget</classname>
-        </gadget>-->
+        </gadget>
 
         <gadget>
             <name>ImageFinish</name>
