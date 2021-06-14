@@ -25,7 +25,7 @@ cmake ../ -DCMAKE_INSTALL_PREFIX=/home/$USER/local -G Ninja && ninja install && 
 
 ## Install Toolbox:
 `git clone https://github.com/NHLBI-MR/selfgated_noncartesian_reconstruction.git && 
-cd selfgated_noncartesian_reconstruction && mkdir build && mkdir /home/$USER/local && cd build &&
+cd selfgated_noncartesian_reconstruction && mkdir build && cd build &&
 cmake ../ -DCMAKE_INSTALL_PREFIX=/home/$USER/local -G Ninja && ninja install` 
 
 
