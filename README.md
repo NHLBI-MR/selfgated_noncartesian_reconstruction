@@ -21,7 +21,7 @@ cmake --build . --config Release --parallel $(nproc) && cmake --install . && cd 
 ## Install Gadgetron:
 `git clone https://github.com/gadgetron/gadgetron.git && 
 cd gadgetron && mkdir build && mkdir /home/$USER/local && cd build &&
-cmake ../ -DCMAKE_INSTALL_PREFIX=/home/$USER/local -G Ninja && ninja install`
+cmake ../ -DCMAKE_INSTALL_PREFIX=/home/$USER/local -G Ninja && ninja install && cd ../../`
 
 ## Install Toolbox:
 `git clone https://github.com/NHLBI-MR/selfgated_noncartesian_reconstruction.git && 
