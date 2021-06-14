@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <version>2</version>
+
+    <readers>
+        <reader>
+            <dll>gadgetron_core_readers</dll>
+            <classname>AcquisitionReader</classname>
+        </reader>
+        <reader>
+            <dll>gadgetron_core_readers</dll>
+            <classname>WaveformReader</classname>
+        </reader>
+    </readers>
+
+    <writers>
+        <writer>
+            <dll>gadgetron_core_writers</dll>
+            <classname>ImageWriter</classname>
+        </writer>
+    </writers>
+
+    <stream>
+      
+    <!-- Noise prewhitening -->
+        <gadget>
+            <dll>gadgetron_mricore</dll>
+            <classname>NoiseAdjustGadget</classname>
+
+        </gadget>
+
+
+        <!-- Convert gradient waveforms into trajectories -->
+        <gadget>
+            <name>WaveformToTrajectory</name>
+            <dll>lit_sgncr_toolbox</dll>
+            <classname>WaveformToTrajectory</classname>
+            <property><name>perform_GIRF</name><value>true</value></property>
+            <property><name>GIRF_folder</name><value>/opt/data/GIRF/</value></property>
+        </gadget>
+        
+       <gadget>
+            <dll>lit_sgncr_toolbox</dll>
+            <classname>GatingandBinningGadget</classname>
+            <property><name>acceptancePercentage</name><value>40</value></property>
+            <property><name>testAcceptance</name><value>false</value></property>
+            <property><name>useDC</name><value>false</value></property>
+            <property><name>cs_freq_filter</name><value>0.1</value></property>
+            <property><name>dotwostepSVD</name><value>true</value></property>
+            <property><name>useStableBinning</name><value>true</value></property>
+            <property><name>numberOfBins</name><value>6</value></property>
+            <property><name>up_perc</name><value>0.95</value></property>
+            <property><name>low_perc</name><value>0.05</value></property>
+        </gadget>
+
+        <gadget>
+            <dll>gadgetron_mricore</dll>
+            <classname>PCACoilGadget</classname>
+        </gadget>
+
+        <gadget>
+            <dll>gadgetron_mricore</dll>
+            <classname>CoilReductionGadget</classname>
+            <property name="coils_out" value="8"/>
+        </gadget>
+        
+        <gadget>
+            <name>SpiralAccumulateFast</name>
+            <dll>lit_sgncr_toolbox</dll>
+            <classname>SpiralAccumulateFast</classname>
+            <property><name>generateTraj</name><value>false</value></property>
+            <property><name>perform_GIRF</name><value>false</value></property>
+        </gadget>
+
+        <gadget>
+            <name>WeightsEstimationGadget</name>
+            <dll>lit_sgncr_toolbox</dll>
+            <classname>WeightsEstimationGadget</classname>
+            <property><name>iterations</name><value>10</value></property>
+            <property><name>overSampling</name><value>5.5</value></property>
+        </gadget>
+
+        <gadget>
+            <name>SenseGriddingReconGadget3D_Parallel</name>
+            <dll>lit_sgncr_toolbox</dll>
+            <classname>SenseGriddingReconGadget3D_Parallel</classname>
+            <property><name>useIterativeDCW</name><value>true</value></property>	
+            <property><name>useIterativeDCWEstimated</name><value>false</value></property>
+            <property><name>iterations</name><value>3</value></property>
+            <property><name>iterationsSense</name><value>10</value></property>
+            <property><name>tolSense</name><value>1e-3</value></property>
+            <property><name>fwidth</name><value>24</value></property>
+            <property><name>fsigma</name><value>1.2</value></property>
+            <property><name>ftype</name><value>none</value></property>
+            <property><name>kappa</name><value>0.00</value></property>
+            <property><name>Debug</name><value>0</value></property>
+            <property><name>doConcomitantFieldCorrection</name><value>true</value></property>
+            <property><name>NoSense</name><value>0</value></property><!-- We want to use sense but its not stable and has GPU memory beef -->
+        </gadget>
+
+
+        <gadget>
+            <name>ImageArraySplit</name>
+            <dll>gadgetron_mricore</dll>
+            <classname>ImageArraySplitGadget</classname>
+        </gadget>
+
+        <gadget>
+            <name>ComplexToFloatAttrib</name>
+            <dll>gadgetron_mricore</dll>
+            <classname>ComplexToFloatGadget</classname>
+        </gadget>
+        
+         <gadget>
+            <name>AutoScaleGadget</name>
+            <dll>gadgetron_mricore</dll>
+            <classname>AutoScaleGadget</classname>
+        </gadget> 
+
+        <gadget>
+            <name>FloatToShort</name>
+            <dll>gadgetron_mricore</dll>
+            <classname>FloatToUShortGadget</classname>
+        </gadget>-->
+
+        <gadget>
+            <name>ImageFinish</name>
+            <dll>gadgetron_mricore</dll>
+            <classname>ImageFinishGadget</classname>
+        </gadget>
+        
+    </stream>
+</configuration>
