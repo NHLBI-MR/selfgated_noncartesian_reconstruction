@@ -19,8 +19,8 @@ cmake --build . --config Release --parallel $(nproc) && cmake --install . && cd 
 
 
 ## Install Gadgetron:
-`git clone https://github.com/gadgetron/gadgetron.git && 
-cd gadgetron && mkdir build && mkdir /home/$USER/local && cd build &&
+`git clone https://github.com/ahsanjav/gadgetron.git && cd gadgetron && 
+git checkout WIPDCF && mkdir build && mkdir /home/$USER/local && cd build &&
 cmake ../ -DCMAKE_INSTALL_PREFIX=/home/$USER/local -G Ninja && ninja install && cd ../../`
 
 ## Install Toolbox:
