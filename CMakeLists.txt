@@ -73,10 +73,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CURAND_FLAGS}")
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-#add_subdirectory(sdc)
-#set(GADGETRON_BUILD_RPATH "${CMAKE_CURRENT_BINARY_DIR};${GADGETRON_BUILD_RPATH}" PARENT_SCOPE)
-
-
 set( gadgetron_lit_sgncr_toolbox_header_files
 	waveforms/WaveformToTrajectory.h
 	spiral/SpiralBuffer.h
@@ -101,7 +97,7 @@ list(APPEND gadgetron_lit_sgncr_toolbox_src_files reconstruction/SenseGriddingRe
 endif()
 
 set( gadgetron_lit_sgncr_toolbox_config_files
-	config/spiral_inline_binning.xml
+	config/spiral_nc_example.xml
  )
 
 add_library(lit_sgncr_toolbox SHARED  

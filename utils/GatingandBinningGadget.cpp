@@ -69,27 +69,6 @@ public:
         return output; // Min,Max
     }
 
-    std::vector<std::tuple<float, float>> respiratoryPhases(hoNDArray<float> data)
-    {
-        auto inputData = data;
-        std::vector<std::tuple<float, float>> output;
-        //lit_sgncr_toolbox::utils::write_cpu_nd_array<float>(inputData, "/opt/data/gt_data/stableBin_data.real");
-
-        std::sort(inputData.begin(), inputData.end());
-
-        //lit_sgncr_toolbox::utils::write_cpu_nd_array<float>(inputData, "/opt/data/gt_data/stableBin_data_sorted.real");
-
-        auto ulimit = Gadgetron::percentile(data, float(up_perc));
-        auto llimit = Gadgetron::percentile(data, float(low_perc));
-
-        auto delta = (ulimit - llimit) / (numberOfBins - 1);
-
-        for (auto ii = 0; ii < numberOfBins; ii++)
-            output.push_back(std::make_tuple(llimit + ii * delta, llimit + (ii + 1) * delta));
-
-        return output;
-    }
-
     std::vector<float> findNavAngle(std::vector<uint32_t> navTimestamps, std::vector<uint32_t> acqTimestamps, std::vector<float> traj_angles)
     {
         GadgetronTimer timer("Find Nav angles:");
@@ -381,21 +360,12 @@ public:
         maxValue(sig, maxsig);
 
         sig /= maxsig;
-        //lit_sgncr_toolbox::utils::write_cpu_nd_array<float>(sig, "/opt/data/gt_data/sig_norm.real");
-        std::vector<std::tuple<float, float>> binLimits;
-        if (useStableBinning)
-            binLimits = stableBinning(abs(sig), acceptancePercent);
-        else
-            binLimits = respiratoryPhases(abs(sig));
-        // [ mins, maxs ]
-        // if(doStableBinning)
-        //     auto [mins, maxs] = stableBinning(sig, acceptancePercent);
-        // else
-        //     auto rep_phase_lims = respiratoryPhases(sig);
+
+        auto binLimits = stableBinning(abs(sig), acceptancePercent);
 
         std::vector<std::vector<float>> acceptedTimes;
-        for (auto [mins, maxs] : binLimits)
-        {
+        auto [mins, maxs] = binLimits.front();
+        
             std::vector<float> tempAT;
             for (auto i = 0; i < sig.get_size(0); i++)
             {
@@ -412,7 +382,7 @@ public:
                 }
             }
             acceptedTimes.push_back(tempAT);
-        }
+        
         return std::make_tuple(samplingTime / 2.5, acceptedTimes);
     }
     void process(InputChannel<Acquisition> &in, OutputChannel &out) override
@@ -546,18 +516,13 @@ public:
                         {
                             GadgetronTimer timer("Binning send :");
                             int sent_counter = 0;
-                            //#pragma omp parallel for shared(acquisitionsvec,idx_to_send,sent_counter)
-                            // #pragma omp parallel
-                            // #pragma omp for
+
                             for (auto i = 0; i < acquisitionsvec.size(); i++)
                             {
 
                                 if (!idx_to_send.empty() && i == idx_to_send[sent_counter])
                                 {
-                                    //out.push(std::move(acquisitionsvec[idx_to_send[i]]));
                                     auto [head, data, traj] = (acquisitionsvec[idx_to_send[sent_counter]]);
-                                    //head.flags = lastFlags;
-                                    //head.setFlag(ISMRMRD::ISMRMRD_ACQ_LAST_IN_MEASUREMENT);
                                     head.idx.phase = phase;
                                     out.push(Core::Acquisition(std::move(head), std::move(data), std::move(traj)));
                                     sent_counter++;
@@ -569,8 +534,6 @@ public:
                                         auto [head, data, traj] = (acquisitionsvec[i]);
                                         head.idx.phase = 0;
                                         out.push(Core::Acquisition(std::move(head), std::move(data), std::move(traj)));
-                                        //head.flags = lastFlags;
-                                        //head.setFlag(ISMRMRD::ISMRMRD_ACQ_LAST_IN_MEASUREMENT);
                                     }
                                 }
                             }
@@ -586,58 +549,10 @@ public:
                     navAngles.clear();
                     data_sent = true;
                 }
-                //     else
-                //     {
-                //         for (float ap = 40; ap >= 10; ap = ap - 10)
-                //         {
-                //             auto tempacq = navigatoracqvec;
 
-                //             auto navAngles = findNavAngle(nav_tstamp, acq_tstamp, traj_angles);
-                //             auto [samplingTime, acceptedTimes] = estimateGatingSignal(tempacq, ap, navAngles);
-
-                //             std::vector<size_t> idx_to_send;
-                //             auto counter = 0;
-                //             // Super inefficient
-                //             //#pragma omp parallel for
-                //             for (auto i = 0; i < headers.size(); i++)
-                //             {
-                //                 for (int j = counter; j < acceptedTimes.size(); j++)
-                //                 {
-                //                     auto t = acceptedTimes[j];
-                //                     if (abs(t - float(headers[i].acquisition_time_stamp)) < samplingTime)
-                //                     {
-                //                         if (!std::count(idx_to_send.begin(), idx_to_send.end(), i))
-                //                         {
-                //                             idx_to_send.push_back(i);
-                //                             counter = j;
-                //                         }
-                //                     }
-                //                     if (float(headers[i].acquisition_time_stamp) - t < 0 && abs(t - float(headers[i].acquisition_time_stamp)) > 2 * samplingTime)
-                //                         continue;
-                //                 }
-                //             }
-                //             //#pragma omp parallel for
-                //             for (auto i = 0; i < idx_to_send.size(); i++)
-                //             {
-                //                 if (i < idx_to_send.size() - 1)
-                //                 {
-                //                     out.push(std::move(acquisitionsvec[idx_to_send[i]]));
-                //                 }
-                //                 else
-                //                 {
-                //                     auto &[head, data, traj] = (acquisitionsvec[idx_to_send[i]]);
-                //                     head.flags = lastFlags;
-                //                     head.setFlag(ISMRMRD::ISMRMRD_ACQ_LAST_IN_MEASUREMENT);
-
-                //                     out.push(std::move(Core::Acquisition((head), (data), (traj))));
-                //                 }
-                //             }
-                //             idx_to_send.clear();
-                //         }
-                //     }
             }
         }
-        if (!data_sent)
+        if (!data_sent) //deals with case if last in meas flag was not set
         {
             if (!testAcceptance)
             {
@@ -736,17 +651,14 @@ public:
 protected:
     ISMRMRD::IsmrmrdHeader header;
     NODE_PROPERTY(acceptancePercentage, float, "BinningAcceptance", 40);
-    NODE_PROPERTY(doStableBinning, bool, "StableBinning", true);
     NODE_PROPERTY(numberOfBins, size_t, "numberOfBins", 4);
     NODE_PROPERTY(testAcceptance, bool, "TestAcceptance", false);
-    NODE_PROPERTY(useDC, bool, "useDC", false);
-    NODE_PROPERTY(useDCall, bool, "useDCalldata", false);
+    NODE_PROPERTY(useDC, bool, "useDC", false);            //DC binning if SI RO are not available 
+    NODE_PROPERTY(useDCall, bool, "useDCalldata", false); //DC binning switch to do kz=0 (false) or all kz (true)
     NODE_PROPERTY(doAngularFilteration, bool, "perform AngularFilteration", true);
     NODE_PROPERTY(dotwostepSVD, bool, "dotwoStepsvd", false);
     NODE_PROPERTY(cs_freq_filter, float, "channel selection frequency filter sigma", 0.05); // cs = channel selection frequency filter
     NODE_PROPERTY(useStableBinning, bool, "Use stable binning", true);                      // cs = channel selection frequency filter
-    NODE_PROPERTY(up_perc, float, "up_perc for binning", 0.95);
-    NODE_PROPERTY(low_perc, float, "low_perc for binning", 0.05);
 
 private:
 };

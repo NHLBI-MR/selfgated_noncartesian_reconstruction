@@ -71,7 +71,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xmainx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gadgetron/config" TYPE FILE FILES "/opt/code/selfgated_noncartesian_reconstruction/config/spiral_inline_binning.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gadgetron/config" TYPE FILE FILES "/opt/code/selfgated_noncartesian_reconstruction/config/spiral_nc_example.xml")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)

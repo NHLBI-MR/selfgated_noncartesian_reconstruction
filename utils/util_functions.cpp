@@ -228,15 +228,6 @@ namespace lit_sgncr_toolbox
                 std::move(arrays[ii].begin(), arrays[ii].end(), output.begin() + stride);
                 stride += arrays[ii].size();
             }
-            // for (size_t iter = 0; iter < arrays.size(); iter++)
-            // {
-            //     // auto strideCur = arrays[iter].size();
-            //     // memmove(output.get_data_ptr() + stride,
-            //     //        arrays[iter].get_data_ptr(),
-            //     //        strideCur * sizeof(T));
-            //     // stride += strideCur;
-
-            // }
 
             return output;
         }
@@ -280,7 +271,6 @@ namespace lit_sgncr_toolbox
                     selectedDevice = dno;
                 }
             }
-            //GDEBUG_STREAM("Selected Device: " << selectedDevice);
             return selectedDevice;
         }
 
@@ -293,20 +283,14 @@ namespace lit_sgncr_toolbox
 
             /* machines with no GPUs can still report one emulation device */
 
-           // GDEBUG_STREAM("req_size# " << req_size);
-
             if (req_size < (long)6 * std::pow(1024, 3))
                 req_size = (long)6 * std::pow(1024, 3);
 
-            //GDEBUG_STREAM("req_size# " << req_size);
 
             for (int dno = 0; dno < totalNumberofDevice; dno++)
             {
                 cudaSetDevice(dno);
-               // GDEBUG_STREAM("Free_memory# " << cudaDeviceManager::Instance()->getFreeMemory(dno));
                  cudaGetDeviceProperties(&properties, dno);
-               //  GDEBUG_STREAM("MajorMode# " << properties.major);
-               //  GDEBUG_STREAM("Minor# " << properties.minor);
                 
                 if (cudaDeviceManager::Instance()->getFreeMemory(dno) > req_size && properties.major >=6)
                 {
@@ -357,8 +341,7 @@ namespace lit_sgncr_toolbox
                                                                  oversampling_factor_,
                                                                  size_t(iterations), 5.5, ConvolutionType::ATOMIC));
 
-                    //float scale_factor = float(image_dims_os_[0]*image_dims_os_[1]*image_dims_os_[2]) / asum((&t));
-                    //t *= scale_factor;
+
                     dcw_vec.push_back(*(t.to_host()));
                 }
                 else
@@ -383,9 +366,6 @@ namespace lit_sgncr_toolbox
 
             cudaSetDevice(lit_sgncr_toolbox::utils::selectCudaDevice());
 
-            // auto temp = lit_sgncr_toolbox::utils::concat<floatd3>(trajectories);
-            // auto temp_dcf = lit_sgncr_toolbox::utils::concat<float>(dcf);
-
             tdcf = boost::make_shared<cuNDArray<float>>(dcf);
             traj = boost::make_shared<cuNDArray<floatd3>>(trajectories);
             std::vector<size_t> flat_dims = {traj->get_number_of_elements()};
@@ -398,9 +378,6 @@ namespace lit_sgncr_toolbox
                                                          oversampling_factor_,
                                                          size_t(iterations), 5.5, ConvolutionType::ATOMIC));
 
-            //float scale_factor = float(image_dims_os_[0]*image_dims_os_[1]*image_dims_os_[2]) / asum((&t));
-            //t *= scale_factor;
-            //dcw_vec.push_back(*(t.to_host()));
             auto output = *(t.to_host());
             return output;
         }

@@ -4,7 +4,7 @@
 /usr/local/include/gadgetron/window_filter.h
 /usr/local/include/gadgetron/mri_concomitant_field_correction.h
 /usr/local/lib/liblit_sgncr_toolbox.so
-/usr/local/share/gadgetron/config/spiral_inline_binning.xml
+/usr/local/share/gadgetron/config/spiral_nc_example.xml
 /usr/local/lib/liblit_sgncr_toolbox_gpu.so.SOVERSION
 /usr/local/lib/liblit_sgncr_toolbox_gpu.so
 /usr/local/include/gadgetron/cuda_utils.h
