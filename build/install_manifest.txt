@@ -1,0 +1,10 @@
+/usr/local/include/gadgetron/WaveformToTrajectory.h
+/usr/local/include/gadgetron/SpiralBuffer.h
+/usr/local/include/gadgetron/util_functions.h
+/usr/local/include/gadgetron/window_filter.h
+/usr/local/include/gadgetron/mri_concomitant_field_correction.h
+/usr/local/lib/liblit_sgncr_toolbox.so
+/usr/local/share/gadgetron/config/spiral_inline_binning.xml
+/usr/local/lib/liblit_sgncr_toolbox_gpu.so.SOVERSION
+/usr/local/lib/liblit_sgncr_toolbox_gpu.so
+/usr/local/include/gadgetron/cuda_utils.h

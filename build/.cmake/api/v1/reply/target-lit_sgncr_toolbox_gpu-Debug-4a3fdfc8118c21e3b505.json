@@ -1,0 +1,382 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "utils/gpu/liblit_sgncr_toolbox_gpu.so"
+		}
+	],
+	"backtrace" : 2,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"cuda_add_library",
+			"install",
+			"link_directories",
+			"target_link_libraries"
+		],
+		"files" : 
+		[
+			"/usr/share/cmake-3.16/Modules/FindCUDA.cmake",
+			"utils/gpu/CMakeLists.txt",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 1,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 1825,
+				"parent" : 1
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 39,
+				"parent" : 0
+			},
+			{
+				"file" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 19,
+				"parent" : 4
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 7,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 20,
+				"parent" : 0
+			}
+		]
+	},
+	"id" : "lit_sgncr_toolbox_gpu::@d6155846f66553a070ef",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 3,
+				"path" : "lib"
+			},
+			{
+				"backtrace" : 3,
+				"path" : "lib"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "/usr/local"
+		}
+	},
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "-L/usr/local/lib",
+				"role" : "libraryPath"
+			},
+			{
+				"fragment" : "-Wl,-rpath,/usr/local/lib:/usr/local/cuda/lib64:/usr/lib/x86_64-linux-gnu/hdf5/serial:",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/cuda/lib64/libcudart.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "/usr/local/lib/libgadgetron_toolbox_spiral.so.4.1.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "/usr/local/lib/libgadgetron_toolbox_cpunfft.so.4.1.1",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_hostutils",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_mri_core",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_gpusdc",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_cpusdc",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_gpucore",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_gpusolvers",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_gpuoperators",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_gpuparallelmri",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_mri_noncartesian",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_spiral",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_cpunfft",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_gpunfft",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_log",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/cuda/lib64/libcudart.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_hostutils",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_mri_core",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_gpusdc",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_cpusdc",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_gpucore",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_gpusolvers",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_gpuoperators",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_gpuparallelmri",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_mri_noncartesian",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_spiral",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_cpunfft",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_gpunfft",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lgadgetron_toolbox_log",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libgadgetron_toolbox_mri_core.so.4.1.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "/usr/local/lib/libgadgetron_core.so.4.1.1",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libgadgetron_toolbox_cpuklt.so.4.1.1",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libgadgetron_toolbox_image_analyze_io.so.4.1.1",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libgadgetron_toolbox_cpufft.so.4.1.1",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "/usr/local/lib/libgadgetron_toolbox_cpucore_math.so.4.1.1",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-llapacke",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/lib/x86_64-linux-gnu/liblapacke.so",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libopenblas.so",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libgadgetron_toolbox_cpucore.so.4.1.1",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libismrmrd.so.1.4.2",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/lib/x86_64-linux-gnu/hdf5/serial/libhdf5.so",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libpthread.so",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libsz.so",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libz.so",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libdl.so",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-lm",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libfftw3f.so",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libfftw3.so",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libgadgetron_toolbox_hostutils.so.4.1.1",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/local/lib/libgadgetron_toolbox_log.so.4.1.1",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "/usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "lit_sgncr_toolbox_gpu",
+	"nameOnDisk" : "liblit_sgncr_toolbox_gpu.so",
+	"paths" : 
+	{
+		"build" : "utils/gpu",
+		"source" : "utils/gpu"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Object Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				1
+			]
+		},
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				2
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 2,
+			"isGenerated" : true,
+			"path" : "build/utils/gpu/CMakeFiles/lit_sgncr_toolbox_gpu.dir/lit_sgncr_toolbox_gpu_generated_cuda_utils.cu.o",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 2,
+			"path" : "utils/gpu/cuda_utils.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 2,
+			"path" : "utils/gpu/cuda_utils.cu",
+			"sourceGroupIndex" : 2
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}

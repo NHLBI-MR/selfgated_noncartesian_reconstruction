@@ -1,0 +1,49 @@
+[
+{
+  "directory": "/opt/code/selfgated_noncartesian_reconstruction/build",
+  "command": "/bin/g++-9  -DARMA_64BIT_WORD -DARMA_DONT_USE_WRAPPER -DARMA_USE_CXX11 -DBOOST_ALL_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DUSE_OMP -Dlit_sgncr_toolbox_EXPORTS -I/usr/local/cuda/include -I\"../utils/gpu/\\$$<BUILD_INTERFACE:/opt/code/selfgated_noncartesian_reconstruction/utils/gpu\" -I\"../utils/gpu/\\$$<BUILD_INTERFACE:/opt/code/selfgated_noncartesian_reconstruction\" -I../utils -I../non_cartesian -I../waveforms -I../spiral -isystem /usr/local/include/gadgetron   -fopenmp -lcurand_static -lculibos -lcudart_static -lpthread -ldl -I /usr/local/cuda/include -L /usr/local/cuda/lib64 -g -fPIC   -std=gnu++17 -o CMakeFiles/lit_sgncr_toolbox.dir/waveforms/WaveformToTrajectory.cpp.o -c /opt/code/selfgated_noncartesian_reconstruction/waveforms/WaveformToTrajectory.cpp",
+  "file": "/opt/code/selfgated_noncartesian_reconstruction/waveforms/WaveformToTrajectory.cpp"
+},
+
+{
+  "directory": "/opt/code/selfgated_noncartesian_reconstruction/build",
+  "command": "/bin/g++-9  -DARMA_64BIT_WORD -DARMA_DONT_USE_WRAPPER -DARMA_USE_CXX11 -DBOOST_ALL_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DUSE_OMP -Dlit_sgncr_toolbox_EXPORTS -I/usr/local/cuda/include -I\"../utils/gpu/\\$$<BUILD_INTERFACE:/opt/code/selfgated_noncartesian_reconstruction/utils/gpu\" -I\"../utils/gpu/\\$$<BUILD_INTERFACE:/opt/code/selfgated_noncartesian_reconstruction\" -I../utils -I../non_cartesian -I../waveforms -I../spiral -isystem /usr/local/include/gadgetron   -fopenmp -lcurand_static -lculibos -lcudart_static -lpthread -ldl -I /usr/local/cuda/include -L /usr/local/cuda/lib64 -g -fPIC   -std=gnu++17 -o CMakeFiles/lit_sgncr_toolbox.dir/utils/util_functions.cpp.o -c /opt/code/selfgated_noncartesian_reconstruction/utils/util_functions.cpp",
+  "file": "/opt/code/selfgated_noncartesian_reconstruction/utils/util_functions.cpp"
+},
+
+{
+  "directory": "/opt/code/selfgated_noncartesian_reconstruction/build",
+  "command": "/bin/g++-9  -DARMA_64BIT_WORD -DARMA_DONT_USE_WRAPPER -DARMA_USE_CXX11 -DBOOST_ALL_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DUSE_OMP -Dlit_sgncr_toolbox_EXPORTS -I/usr/local/cuda/include -I\"../utils/gpu/\\$$<BUILD_INTERFACE:/opt/code/selfgated_noncartesian_reconstruction/utils/gpu\" -I\"../utils/gpu/\\$$<BUILD_INTERFACE:/opt/code/selfgated_noncartesian_reconstruction\" -I../utils -I../non_cartesian -I../waveforms -I../spiral -isystem /usr/local/include/gadgetron   -fopenmp -lcurand_static -lculibos -lcudart_static -lpthread -ldl -I /usr/local/cuda/include -L /usr/local/cuda/lib64 -g -fPIC   -std=gnu++17 -o CMakeFiles/lit_sgncr_toolbox.dir/utils/GatingandBinningGadget.cpp.o -c /opt/code/selfgated_noncartesian_reconstruction/utils/GatingandBinningGadget.cpp",
+  "file": "/opt/code/selfgated_noncartesian_reconstruction/utils/GatingandBinningGadget.cpp"
+},
+
+{
+  "directory": "/opt/code/selfgated_noncartesian_reconstruction/build",
+  "command": "/bin/g++-9  -DARMA_64BIT_WORD -DARMA_DONT_USE_WRAPPER -DARMA_USE_CXX11 -DBOOST_ALL_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DUSE_OMP -Dlit_sgncr_toolbox_EXPORTS -I/usr/local/cuda/include -I\"../utils/gpu/\\$$<BUILD_INTERFACE:/opt/code/selfgated_noncartesian_reconstruction/utils/gpu\" -I\"../utils/gpu/\\$$<BUILD_INTERFACE:/opt/code/selfgated_noncartesian_reconstruction\" -I../utils -I../non_cartesian -I../waveforms -I../spiral -isystem /usr/local/include/gadgetron   -fopenmp -lcurand_static -lculibos -lcudart_static -lpthread -ldl -I /usr/local/cuda/include -L /usr/local/cuda/lib64 -g -fPIC   -std=gnu++17 -o CMakeFiles/lit_sgncr_toolbox.dir/spiral/SpiralAccumulateFast.cpp.o -c /opt/code/selfgated_noncartesian_reconstruction/spiral/SpiralAccumulateFast.cpp",
+  "file": "/opt/code/selfgated_noncartesian_reconstruction/spiral/SpiralAccumulateFast.cpp"
+},
+
+{
+  "directory": "/opt/code/selfgated_noncartesian_reconstruction/build",
+  "command": "/bin/g++-9  -DARMA_64BIT_WORD -DARMA_DONT_USE_WRAPPER -DARMA_USE_CXX11 -DBOOST_ALL_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DUSE_OMP -Dlit_sgncr_toolbox_EXPORTS -I/usr/local/cuda/include -I\"../utils/gpu/\\$$<BUILD_INTERFACE:/opt/code/selfgated_noncartesian_reconstruction/utils/gpu\" -I\"../utils/gpu/\\$$<BUILD_INTERFACE:/opt/code/selfgated_noncartesian_reconstruction\" -I../utils -I../non_cartesian -I../waveforms -I../spiral -isystem /usr/local/include/gadgetron   -fopenmp -lcurand_static -lculibos -lcudart_static -lpthread -ldl -I /usr/local/cuda/include -L /usr/local/cuda/lib64 -g -fPIC   -std=gnu++17 -o CMakeFiles/lit_sgncr_toolbox.dir/spiral/WeightsEstimationGadget.cpp.o -c /opt/code/selfgated_noncartesian_reconstruction/spiral/WeightsEstimationGadget.cpp",
+  "file": "/opt/code/selfgated_noncartesian_reconstruction/spiral/WeightsEstimationGadget.cpp"
+},
+
+{
+  "directory": "/opt/code/selfgated_noncartesian_reconstruction/build",
+  "command": "/bin/g++-9  -DARMA_64BIT_WORD -DARMA_DONT_USE_WRAPPER -DARMA_USE_CXX11 -DBOOST_ALL_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DUSE_OMP -Dlit_sgncr_toolbox_EXPORTS -I/usr/local/cuda/include -I\"../utils/gpu/\\$$<BUILD_INTERFACE:/opt/code/selfgated_noncartesian_reconstruction/utils/gpu\" -I\"../utils/gpu/\\$$<BUILD_INTERFACE:/opt/code/selfgated_noncartesian_reconstruction\" -I../utils -I../non_cartesian -I../waveforms -I../spiral -isystem /usr/local/include/gadgetron   -fopenmp -lcurand_static -lculibos -lcudart_static -lpthread -ldl -I /usr/local/cuda/include -L /usr/local/cuda/lib64 -g -fPIC   -std=gnu++17 -o CMakeFiles/lit_sgncr_toolbox.dir/utils/window_filter.cpp.o -c /opt/code/selfgated_noncartesian_reconstruction/utils/window_filter.cpp",
+  "file": "/opt/code/selfgated_noncartesian_reconstruction/utils/window_filter.cpp"
+},
+
+{
+  "directory": "/opt/code/selfgated_noncartesian_reconstruction/build",
+  "command": "/bin/g++-9  -DARMA_64BIT_WORD -DARMA_DONT_USE_WRAPPER -DARMA_USE_CXX11 -DBOOST_ALL_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DUSE_OMP -Dlit_sgncr_toolbox_EXPORTS -I/usr/local/cuda/include -I\"../utils/gpu/\\$$<BUILD_INTERFACE:/opt/code/selfgated_noncartesian_reconstruction/utils/gpu\" -I\"../utils/gpu/\\$$<BUILD_INTERFACE:/opt/code/selfgated_noncartesian_reconstruction\" -I../utils -I../non_cartesian -I../waveforms -I../spiral -isystem /usr/local/include/gadgetron   -fopenmp -lcurand_static -lculibos -lcudart_static -lpthread -ldl -I /usr/local/cuda/include -L /usr/local/cuda/lib64 -g -fPIC   -std=gnu++17 -o CMakeFiles/lit_sgncr_toolbox.dir/utils/concomitantFieldCorrection/mri_concomitant_field_correction.cpp.o -c /opt/code/selfgated_noncartesian_reconstruction/utils/concomitantFieldCorrection/mri_concomitant_field_correction.cpp",
+  "file": "/opt/code/selfgated_noncartesian_reconstruction/utils/concomitantFieldCorrection/mri_concomitant_field_correction.cpp"
+},
+
+{
+  "directory": "/opt/code/selfgated_noncartesian_reconstruction/build",
+  "command": "/bin/g++-9  -DARMA_64BIT_WORD -DARMA_DONT_USE_WRAPPER -DARMA_USE_CXX11 -DBOOST_ALL_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_PROGRAM_OPTIONS_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DUSE_OMP -Dlit_sgncr_toolbox_EXPORTS -I/usr/local/cuda/include -I\"../utils/gpu/\\$$<BUILD_INTERFACE:/opt/code/selfgated_noncartesian_reconstruction/utils/gpu\" -I\"../utils/gpu/\\$$<BUILD_INTERFACE:/opt/code/selfgated_noncartesian_reconstruction\" -I../utils -I../non_cartesian -I../waveforms -I../spiral -isystem /usr/local/include/gadgetron   -fopenmp -lcurand_static -lculibos -lcudart_static -lpthread -ldl -I /usr/local/cuda/include -L /usr/local/cuda/lib64 -g -fPIC   -std=gnu++17 -o CMakeFiles/lit_sgncr_toolbox.dir/reconstruction/SenseGriddingReconGadget3D_Parallel.cpp.o -c /opt/code/selfgated_noncartesian_reconstruction/reconstruction/SenseGriddingReconGadget3D_Parallel.cpp",
+  "file": "/opt/code/selfgated_noncartesian_reconstruction/reconstruction/SenseGriddingReconGadget3D_Parallel.cpp"
+}
+]
