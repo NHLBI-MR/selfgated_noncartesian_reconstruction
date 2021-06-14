@@ -84,6 +84,7 @@ public:
         verbose = false;
     }
 
+// Convert trajectory to gradients for concomitant field correction
     hoNDArray<floatd3> traj2grad(const hoNDArray<floatd3> &trajectory, float kspace_scaling, float gamma)
     {
         auto gradients = trajectory;
@@ -104,6 +105,8 @@ public:
         }
         return gradients;
     }
+    
+    // Binning 
     std::tuple<std::vector<arma::vec>, std::vector<hoNDArray<float_complext>>> divide_bins(arma::vec in, hoNDArray<float_complext> &weights, int numGPUs)
     {
         std::vector<arma::vec> out;
@@ -137,27 +140,25 @@ public:
                 sindex += stride + 1;
             }
 
-            //auto nn = arma::vec(n);
-        }
+      }
         return std::make_tuple(out, out_weights);
     }
+    
+    // K-space demodulation for MFI concomitant field deblurring 
     void demodulate_kspace(
         cuNDArray<float_complext> &demodulated_data,
         const cuNDArray<float> &scaled_time,
         float demodulation_freq)
     {
+
         //GadgetronTimer timer("Demodulation");
         constexpr float PI = boost::math::constants::pi<float>();
 
         auto recon_dim = demodulated_data.get_dimensions();
         recon_dim->pop_back();
-        //hoNDArray<std::complex<float>> phase_term(recon_dim);
-
+        
         auto val = float(-2.0 * PI * demodulation_freq);
-        //  scaled_time *= val;
-
-        //scaled_time *= val;
-
+        
         auto arg_exp = std::move(*imag_to_complex<float_complext>(&scaled_time));
         arg_exp *= val;
         auto phase_term = lit_sgncr_toolbox::cuda_utils::cuexp<float_complext>(arg_exp);
@@ -181,6 +182,8 @@ public:
         }
 
     }
+    
+    // Stack-of-Spirals Slice extraction
     std::vector<arma::uvec> extractSlices(hoNDArray<floatd3> sp_traj)
     {
         auto sl_traj = arma::vec(sp_traj.get_size(1));
@@ -198,6 +201,8 @@ public:
 
         return slice_indexes;
     }
+    
+    // GPU Gridding reconstruction
     boost::shared_ptr<cuNDArray<float_complext>> reconstruct(
         cuNDArray<float_complext> *data,
         cuNDArray<floatd3> *traj,
@@ -236,6 +241,7 @@ public:
         return result;
     }
 
+    // Concomitant field correction reconstruction
     cuNDArray<float_complext> concomitant_reconstruction(hoNDArray<float_complext> &data, hoNDArray<floatd3> &trajectory_in, hoNDArray<float> &dcf_in, hoNDArray<float_complext> &cweights_ho, hoNDArray<float> &scaled_time_in, arma::vec fbins)
     {
 
@@ -311,6 +317,10 @@ public:
         return channel_images;
     }
 
+// ==================================
+//    Main Reconstruction Process
+// ==================================
+
     void process(InputChannel<Core::variant<Gadgetron::SpiralBuffer<hoNDArray, float_complext, 3>>> &in,
                  OutputChannel &out) override
     {
@@ -355,7 +365,7 @@ public:
 
         auto maxNumElements = ((header.encoding.at(0).encodingLimits.kspace_encoding_step_1.get().maximum + 1) *
                                (header.encoding[0].encodingLimits.kspace_encoding_step_2.get().maximum + 1) * (header.encoding[0].encodingLimits.average.get().maximum + 1) * (header.encoding[0].encodingLimits.repetition.get().maximum + 1)); // use -1 for data acquired b/w 12/23 - 01/21
-        // this->cn.plan();
+        
         for (auto message : in)
         {
             GadgetronTimer timer("Sense Gridding Recon");
@@ -371,6 +381,7 @@ public:
                     estimate_oneslice = false;
             }
 
+            // Convert spiral trajectories to gradients for Concomitant Field Correction 
             gradients = traj2grad(sp_traj, kspace_scaling, GAMMA);
 
             RO = (sp_data).get_size(0);
@@ -394,11 +405,7 @@ public:
             if (scaleMultiplier < 0.001)
                 scaleMultiplier = 1.0;
 
-            //auto scale_term = prod(image_dims_os_) / oversampling_factor_ * sqrt(float(maxNumElements * RO)) * 1e-6;
-            //auto scale_term =  std::sqrt(float(maxNumElements * RO)) / prod(image_dims_os_) ;
             this->initialize_encoding_space_limits(this->header);
-            //float scale_term = (float)sp_headers[0].user_float[7];
-            //scale_term = 1.0;
             using namespace Gadgetron::Indexing;
 
             recon_dims = {image_dims_[0], image_dims_[1], image_dims_[2], CHA};
@@ -461,13 +468,13 @@ public:
                                     channel_images,
                                     channel_images_cropped);
 
-            //  recon_dims = {image_dims_[0], image_dims_[1], CHA, E2}; // Cropped to size of Recon Matrix
             channel_images = pad<float_complext, 4>(uint64d4(recon_dims[0], recon_dims[1], image_dims_[2], CHA),
                                                     channel_images_cropped, float_complext(0));
             if (!csm_calculated_)
             {
+            // Accrued data will be used to estimate CSM
+            
                 series_counter = 0;
-                //                auto temp = boost::make_shared<cuNDArray<float_complext>>(estimate_b1_map<float, 3>(channel_images_cropped));
                 auto temp = boost::make_shared<cuNDArray<float_complext>>(lit_sgncr_toolbox::utils::estimateCoilmaps_slice(channel_images_cropped));
 
                 csm = boost::make_shared<cuNDArray<float_complext>>(pad<float_complext, 4>(uint64d4(recon_dims[0], recon_dims[1], image_dims_[2], CHA),
@@ -544,6 +551,8 @@ public:
             }
             else
             {
+            // CSM has been calculated; SENSE RECON
+            
                 series_counter = 1;
 
                 if (Debug)
@@ -552,6 +561,7 @@ public:
                     lit_sgncr_toolbox::utils::write_gpu_nd_array<float_complext>(channel_images, "/opt/data/gt_data/channel_images.complex");
                 }
 
+                // Estimate Weights
                 cudaSetDevice(selectedDevice);
                 auto traj = boost::make_shared<cuNDArray<floatd3>>(sp_traj);
                 std::vector<size_t> flat_dims = {traj->get_number_of_elements()};
@@ -567,6 +577,7 @@ public:
 
                 R_->set_weight(kappa);
 
+                // Set-up SENSE Operator
                 E_->setup(from_std_vector<size_t, 3>(image_dims_), image_dims_os_, kernel_width_);
                 E_->set_dcw(dcw);
                 E_->set_csm(csm);
@@ -685,11 +696,15 @@ public:
     }
 
 protected:
+// ==================================
+// Default Gadget Properties
+// ==================================
+// SENSE 
     NODE_PROPERTY(iterationsSense, size_t, "Number of Iterations Sense", 5);
     NODE_PROPERTY(tolSense, float, "Number of Iterations Sense", 1e-6);
     NODE_PROPERTY(kappa, double, "Kappa", 0.0);
 
-
+// Filters
     NODE_PROPERTY(fwidth, double, "filterWidth", 0.15);       // Filter width through slice
     NODE_PROPERTY(fsigma, double, "filterSigma", 1.0);        // Filter sigma through slice
     NODE_PROPERTY(ftype, std::string, "FilterType", "none");  // Filter type through slice
@@ -697,15 +712,19 @@ protected:
     NODE_PROPERTY(infwidth, double, "infwidth", 0.15);        // Filter width inplane
     NODE_PROPERTY(infsigma, double, "infsigma", 1.0);         // Filter sigma inplane
 
+// Misc
     NODE_PROPERTY(Debug, double, "Debug", 0);
     NODE_PROPERTY(NoSense, double, "NoSense", 1);
     NODE_PROPERTY(SOS, bool, "SOS", false);
 
+// Concomitant Field Corrections
     NODE_PROPERTY(doConcomitantFieldCorrection, bool, "doConcomitantFieldCorrection", true);
     NODE_PROPERTY(doConcomitantFieldCorrectionCSM, bool, "doConcomitantFieldCorrectionCSM", true);
    
+// HW
     NODE_PROPERTY(maxDevices, size_t, "Max Number of GPUs", 4);
     
+ // Scaling opt
     NODE_PROPERTY(scalewithinterleaves, bool, "scalewinterleaves", true);
 
     int series_counter = 0;
