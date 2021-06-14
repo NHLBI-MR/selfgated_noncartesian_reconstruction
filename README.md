@@ -10,7 +10,7 @@ mkdir mrprogs && cd mrprogs
 
 ### Install Ubuntu toolboxes:
 
-`apt install --no-install-recommends --no-install-suggests --yes apt-utils build-essential cmake cpio cython3 gcc-multilib git-core h5utils hdf5-tools jove jq libace-dev libarmadillo-dev libatlas-base-dev libcrypto++-dev libfftw3-dev libfreetype6-dev libgtest-dev libhdf5-serial-dev liblapack-dev liblapacke-dev libopenblas-base libopenblas-dev libplplot-dev libpugixml-dev libxml2-dev libxslt-dev librocksdb-dev net-tools ninja-build pkg-config python3-dev python3-pip software-properties-common supervisor wget googletest googletest-tools librange-v3-dev nlohmann-json3-dev libboost-all-dev`
+`sudo apt install --no-install-recommends --no-install-suggests --yes apt-utils build-essential cmake cpio cython3 gcc-multilib git-core h5utils hdf5-tools jove jq libace-dev libarmadillo-dev libatlas-base-dev libcrypto++-dev libfftw3-dev libfreetype6-dev libgtest-dev libhdf5-serial-dev liblapack-dev liblapacke-dev libopenblas-base libopenblas-dev libplplot-dev libpugixml-dev libxml2-dev libxslt-dev librocksdb-dev net-tools ninja-build pkg-config python3-dev python3-pip software-properties-common supervisor wget googletest googletest-tools librange-v3-dev nlohmann-json3-dev libboost-all-dev`
 
 ### Install zfp:
 `git -c advice.detachedHead=false clone --branch 0.5.5 --single-branch https://github.com/LLNL/zfp.git &&
