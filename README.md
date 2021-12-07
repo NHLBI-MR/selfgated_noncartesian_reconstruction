@@ -1,6 +1,13 @@
 # selfgated_noncartesian_reconstruction
 Self-gated 3D Stack-of-Spirals Ultra-Short Echo-Time Pulmonary imaging at 0.55T
 
+**Citation:**
+
+ Ahsan Javed, Rajiv Ramasawmy, Kendall O’Brien, Christine Mancini, Pan Su, Waqas Majeed, Thomas Benkert, Himanshu Bhat, Anthony F. Suffredini, Ashkan Malayeri, Adrienne E. Campbell-Washburn.
+  Self-gated 3D stack-of-spirals UTE pulmonary imaging at 0.55T. Magn Reson Med. 2021; 00: 1– 15. doi:10.1002/mrm.29079
+
+https://doi.org/10.1002/mrm.29079
+
 
 # Installation
 This toolbox was designed to be used with GPUs and cannot be installed without cuda support. This release was tested with CUDA 11.0 and above but may work with older releases of cuda. 
